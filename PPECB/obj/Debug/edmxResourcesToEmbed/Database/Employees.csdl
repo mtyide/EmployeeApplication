@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Firstname" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="Id" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="EmployeesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <FunctionImport Name="CreateEmployee" ReturnType="Collection(Int64)">
+      <Parameter Name="created" Mode="In" Type="DateTime" />
+      <Parameter Name="firstname" Mode="In" Type="String" />
+      <Parameter Name="lastname" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="DateTime" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="department" Mode="In" Type="String" />
+      <Parameter Name="active" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteEmployee">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="GetEmployee" ReturnType="Collection(EmployeesModel.GetEmployee_Result)">
+      <Parameter Name="id" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetEmployee_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Firstname" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Lastname" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="DOB" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="Department" Nullable="false" MaxLength="75" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+  </ComplexType>
+</Schema>

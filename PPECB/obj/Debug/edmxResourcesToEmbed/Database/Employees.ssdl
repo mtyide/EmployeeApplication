@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Firstname" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Department" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Function Name="CreateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="created" Type="datetime" Mode="In" />
+    <Parameter Name="firstname" Type="varchar" Mode="In" />
+    <Parameter Name="lastname" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="datetime" Mode="In" />
+    <Parameter Name="gender" Type="varchar" Mode="In" />
+    <Parameter Name="department" Type="varchar" Mode="In" />
+    <Parameter Name="active" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="DeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="EmployeesModelStoreContainer">
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
